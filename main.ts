@@ -10,11 +10,20 @@
 // Outside the grader's container, MAKEFUN_BOT_DIR and MAKEFUN_OUTPUT_DIR stand in for /bot and /output:
 //   mkdir -p out && MAKEFUN_BOT_DIR=. MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { copyFileSync, mkdirSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const BOT_DIR = process.env.MAKEFUN_BOT_DIR ?? '/bot';
 const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+
+// Refuse the starter placeholder: the entry is only real once a post exists.
+// A real post address looks like https://x.com/<handle>/status/<digits>.
+const post = JSON.parse(readFileSync(join(BOT_DIR, 'POST.json'), 'utf8')) as { url?: unknown };
+if (typeof post.url !== 'string' || !/^https:\/\/(x\.com|twitter\.com)\/[^/]+\/status\/\d+$/.test(post.url)) {
+  console.error('POST.json must name a real post address, e.g. https://x.com/<handle>/status/<id>.');
+  process.exit(1);
+}
+console.log(`Copying entry for post ${post.url}`);
 
 mkdirSync(OUTPUT_DIR, { recursive: true });
 try {

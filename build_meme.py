@@ -27,6 +27,7 @@ px0, py0 = 1200 - pill_w - 18, 14
 draw.rounded_rectangle([px0, py0, px0 + pill_w, py0 + pill_h], radius=26, fill=(196, 0, 128, 255))
 draw.text((px0 + pill_w // 2, py0 + pill_h // 2), "make.fun", font=f_pill, fill=(255,255,255), anchor="mm")
 
+# Ghost bottom-right (make.fun mascot) — it sits where Leo is pointing, so the eye follows his finger to make.fun.
 # Ghost bottom-right (make.fun mascot)
 ghost = Image.open(f"{WORK}/ghost.png").convert("RGBA").resize((215, 215), Image.LANCZOS)
 ring = Image.new("RGBA", (231, 231), (0, 0, 0, 0))

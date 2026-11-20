@@ -25,3 +25,4 @@ requires. `POST.json` names the X post carrying the meme.
 
 Posted from the public X account @itsmesan03 with the meme as the first
 picture. Caption carries @makefunai, the bounty link, and the play code.
+The post went out on 20 Nov 2026 as https://x.com/itsmesan03/status/2123581369062420606, with Leo pointing at the ghost while the ghost points at real money.
